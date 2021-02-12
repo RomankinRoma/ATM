@@ -14,6 +14,11 @@
         <property name="id" value="2"/>
         <property name="pin" value="321"/>
     </bean>
+    <bean id="bankServiceBean" class="kz.iitu.atm.service.BankServiceForBean" init-method="init" destroy-method="destroy">
+        <property name="url" value="jdbc:postgresql://localhost:5433/bankService"></property>
+        <property name="password" value="romankin"></property>
+        <property name="user" value="romankin"></property>
+    </bean>
     <bean id="bank" class="kz.iitu.atm.models.Bank">
         <property name="users">
             <list>

@@ -2,58 +2,24 @@ package kz.iitu.atm.service;
 
 import kz.iitu.atm.models.Account;
 import kz.iitu.atm.models.Bank;
+import kz.iitu.atm.repository.AccounRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Scanner;
 
-
+@Service
 public class BankService {
-    Scanner in = new Scanner(System.in);
 
-    Bank bank = new Bank();
+    @Autowired
+    AccounRepository accounRepository;
 
-    public BankService(Bank bank) {
-        this.bank = bank;
+    public List<Account> getAll(){
+        return accounRepository.findAll();
     }
 
-    public void withdraw() {
-        System.out.println("Input login:");
-        String login = in.next();
-        System.out.println("Input pin:");
-        String pin = in.next();
-          for (Account account: bank.getUsers()){
-              if (account.getLogin().equals(login) && account.getPin().equals(pin)){
-                  System.out.println("Input amount:");
-                  Long amount=in.nextLong();
-                  account.setBalance(account.getBalance()-amount);
-                  System.out.println("Successful! Your balance "+account.getBalance());
-              }
-          }
-    }
-
-    public void topUp() {
-        System.out.println("Input login:");
-        String login = in.next();
-        System.out.println("Input pin:");
-        String pin = in.next();
-        for (Account account: bank.getUsers()){
-            if (account.getLogin().equals(login) && account.getPin().equals(pin)){
-                System.out.println("Input amount:");
-                Long amount=in.nextLong();
-                account.setBalance(account.getBalance()+amount);
-                System.out.println("Successful! Your balance "+account.getBalance());
-            }
-        }
-    }
-
-    public void checkBalance() {
-        System.out.println("Input login:");
-        String login = in.next();
-        System.out.println("Input pin:");
-        String pin = in.next();
-        for (Account account: bank.getUsers()){
-            if (account.getLogin().equals(login) && account.getPin().equals(pin)){
-                System.out.println("Your balance "+account.getBalance());
-            }
-        }
+    public List<Account> getAllByBalance(Long bal){
+        return accounRepository.getAllByBalance(bal);
     }
 }
