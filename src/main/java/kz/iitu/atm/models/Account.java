@@ -1,15 +1,17 @@
 package kz.iitu.atm.models;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
+//import javax.persistence.ManyToOne;
 
 @Data
-@Entity
+//@Entity
+@Component
 public class Account {
-    @Id
+//    @Id
     private Long id;
 
     private String login;
@@ -18,6 +20,16 @@ public class Account {
 
     private Long balance;
 
-    @ManyToOne
+//    @ManyToOne
     private Bank bank;
+
+    public Account() {
+    }
+
+    public Account(String login, String pin, Long balance, Bank bank) {
+        this.login = login;
+        this.pin = pin;
+        this.balance = balance;
+        this.bank = bank;
+    }
 }
